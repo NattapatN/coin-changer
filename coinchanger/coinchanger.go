@@ -1,7 +1,6 @@
 package coinchanger
 
 import (
-	"fmt"
 	"sort"
 )
 
@@ -11,10 +10,9 @@ func coinchanger(money int) []int {
 	//reverse coin
 	reveseCoin := sortArrayLargeToSmall(coin)
 
-	expandedCoinArray := expandedCoin(money, reveseCoin)
 	//implement logic
-	result := recursiveSummaryValue(money, 0, expandedCoinArray, []int{})
-	fmt.Println("result is:", result)
+	result := recursiveSummaryValue(money, 0, reveseCoin, []int{})
+
 	return result
 }
 
@@ -26,20 +24,6 @@ func sortArrayLargeToSmall(input []int) []int {
 	return output
 }
 
-func expandedCoin(maximum int, inputArray []int) []int {
-	result := []int{}
-
-	for _, v := range inputArray {
-		duplicateValue := maximum / v
-		if duplicateValue > 0 {
-			for i := 0; i < duplicateValue; i++ {
-				result = append(result, v)
-			}
-		}
-	}
-	return result
-}
-
 func recursiveSummaryValue(target int, sum int, restArray []int, resultArray []int) []int {
 	tempResult := []int{}
 	if len(restArray) == 0 {
@@ -48,7 +32,7 @@ func recursiveSummaryValue(target int, sum int, restArray []int, resultArray []i
 		return append(resultArray, restArray[0])
 	} else if sum+restArray[0] < target {
 		tempSum := sum + restArray[0]
-		tempResult = recursiveSummaryValue(target, tempSum, restArray[1:], append(resultArray, restArray[0]))
+		tempResult = recursiveSummaryValue(target, tempSum, restArray, append(resultArray, restArray[0]))
 	}
 	result := recursiveSummaryValue(target, sum, restArray[1:], resultArray)
 	switch {
