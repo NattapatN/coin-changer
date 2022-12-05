@@ -9,9 +9,9 @@ func TestCoinChanger(t *testing.T) {
 		input          int
 		expectedOutput []int
 	}{
-		{10, []int{7, 3}},
-		{13, []int{7, 3, 3}},
-		{25, []int{7, 7, 5, 3, 3}},
+		{10, []int{5, 5}},
+		{13, []int{7, 5, 1}},
+		{25, []int{7, 7, 5, 5, 1}},
 	}
 
 	for _, tc := range testCases {
